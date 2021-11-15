@@ -35,7 +35,6 @@ module.exports = {
            country_id INTEGER NOT NULL REFERENCES countries(country_id)
         );
          
-           
        
 
 
@@ -268,7 +267,9 @@ module.exports = {
       .query(
         `select cities.city_id,cities.name as city,cities.rating, countries.country_id,countries.name as country
             from cities
-            inner join countries on cities.country_id = countries.country_id`
+            inner join countries on cities.country_id = countries.country_id
+            order by rating desc
+            `
       )
       .then(dbRes => res.status(200).send(dbRes[0]))
       .catch(err => console.log(err));
